@@ -36,4 +36,5 @@ public class Constants {
     public static final String IS_LOGIN_WITH_TOKEN = "isLoginWithToken";
     public static final String IS_LOGIN_WITH_USERNAME = "isLoginWithUsername";
     public static final String LOGIN_USERNAME = "loginUsername";
+    public static final String CERTIFICATE_ID = "67661dc7428e5ed205cc9172c4478ea2";
 }

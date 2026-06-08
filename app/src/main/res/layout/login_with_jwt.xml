@@ -27,6 +27,7 @@
         android:layout_marginTop="16dp"
         android:textIsSelectable="true"
         android:ems="10"
+        android:text="eyJhbGciOiJIUzI1NiIsImN0eSI6InBsaXZvO3Y9MSIsInR5cCI6IkpXVCJ9.eyJhcHAiOiIxNTE4ODE0MTMwODcyMjE0MiIsImV4cCI6MTc4MDk5MDgzMSwiaXNzIjoiU0FZMkUyWlRaSk1ER1RNREtaTUkiLCJuYmYiOjE3ODA5MDQ0MzEsInBlciI6eyJ2b2ljZSI6eyJpbmNvbWluZ19hbGxvdyI6dHJ1ZSwib3V0Z29pbmdfYWxsb3ciOnRydWV9fSwic3ViIjoiNWUyY2RjNTEtNTU1NC00ZmE0LWJiNTAtMjRkZTU3YjRjN2E0In0.4cDu2ocA1xIRpHv6Z6rAiy5DG_CiX8wvh63s7l38IVo"
         android:hint="username/token"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

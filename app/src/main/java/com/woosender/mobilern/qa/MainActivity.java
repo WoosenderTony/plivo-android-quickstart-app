@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements PlivoBackEnd.Back
             Log.d(TAG, "****loginWithToken: login with token");
             String token = Pref.newInstance(MainActivity.this).getString(Constants.JWT_ACCESS_TOKEN);
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult ->
-                    ((App) getApplication()).backend().loginWithJwtToken(instanceIdResult.getToken(), token));
+                    ((App) getApplication()).backend().loginWithJwtToken(instanceIdResult.getToken(), token, Constants.CERTIFICATE_ID));
         } else if (Pref.newInstance(MainActivity.this).getBoolean(Constants.IS_LOGIN_WITH_USERNAME)) {
             Log.d(TAG, "****loginWithToken: login with accessToken generator");
             String token = Pref.newInstance(MainActivity.this).getString(Constants.LOGIN_USERNAME);
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements PlivoBackEnd.Back
         } else {
             Log.d("****@@Incoming", "loginWithToken | is not logged in");
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult ->
-                    ((App) getApplication()).backend().login(instanceIdResult.getToken(), username, password));
+                    ((App) getApplication()).backend().login(instanceIdResult.getToken(), username, password, Constants.CERTIFICATE_ID));
         }
     }
 
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements PlivoBackEnd.Back
             String token = Pref.newInstance(MainActivity.this).getString(Constants.JWT_ACCESS_TOKEN);
             HashMap<String, String> finalPayload = payload;
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult ->
-                    ((App) getApplication()).backend().loginForIncomingWithJwt(instanceIdResult.getToken(), token,"", finalPayload));
+                    ((App) getApplication()).backend().loginForIncomingWithJwt(instanceIdResult.getToken(), token, Constants.CERTIFICATE_ID, finalPayload));
         } else if (Pref.newInstance(MainActivity.this).getBoolean(Constants.IS_LOGIN_WITH_USERNAME)) {
             Log.d(TAG, "****loginWithToken: login with accessToken generator");
             String token = Pref.newInstance(MainActivity.this).getString(Constants.LOGIN_USERNAME);
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements PlivoBackEnd.Back
             Log.d("****@@Incoming", "loginWithToken | is not logged in");
             HashMap<String, String> finalPayload1 = payload;
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult ->
-                    ((App) getApplication()).backend().loginForIncomingWithUsername(username, password,instanceIdResult.getToken(),"", finalPayload1));
+                    ((App) getApplication()).backend().loginForIncomingWithUsername(username, password, instanceIdResult.getToken(), Constants.CERTIFICATE_ID, finalPayload1));
         }
     }
 

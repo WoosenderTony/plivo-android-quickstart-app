@@ -74,15 +74,23 @@ public class PlivoBackEnd implements EventListener {
     }
 
     public boolean login(String newToken, String username, String password) {
+        return login(newToken, username, password, Constants.CERTIFICATE_ID);
+    }
+
+    public boolean login(String newToken, String username, String password, String certificateId) {
         Log.d("@@Incoming", "Endpoint login");
         Utils.setDeviceToken(newToken);
-        return endpoint.login(username, password, newToken);
+        return endpoint.login(username, password, newToken, certificateId);
     }
 
     public boolean loginWithJwtToken(String token, String JWTToken) {
+        return loginWithJwtToken(token, JWTToken, Constants.CERTIFICATE_ID);
+    }
+
+    public boolean loginWithJwtToken(String token, String JWTToken, String certificateId) {
         Log.d("@@Incoming", "Endpoint loginWithJwtToken");
         Utils.setDeviceToken(token);
-        return endpoint.loginWithJwtToken(JWTToken, token);
+        return endpoint.loginWithJwtToken(JWTToken, token, certificateId);
     }
 
     public boolean loginForIncomingWithJwt(String token, String JWTToken, String certificateId, HashMap<String, String> incomingData) {

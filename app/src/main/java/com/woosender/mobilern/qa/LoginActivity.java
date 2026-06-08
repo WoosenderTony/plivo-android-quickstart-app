@@ -49,6 +49,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String userName, String passWord) {
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult ->
-                ((App) getApplication()).backend().login(instanceIdResult.getToken(), userName, passWord));
+                ((App) getApplication()).backend().login(instanceIdResult.getToken(), userName, passWord, Constants.CERTIFICATE_ID));
     }
 }

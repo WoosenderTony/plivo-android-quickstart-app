@@ -29,13 +29,14 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="username"
+        android:text="qa1441019378148963"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appicon"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.179" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="password"
+        android:text="71e61a"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
