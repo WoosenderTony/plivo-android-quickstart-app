@@ -63,6 +63,7 @@
             android:gravity="center"
             android:hint="@string/call_hint"
             android:lines="2"
+            android:text="+19542185461"
             android:textIsSelectable="true"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintLeft_toLeftOf="parent"
