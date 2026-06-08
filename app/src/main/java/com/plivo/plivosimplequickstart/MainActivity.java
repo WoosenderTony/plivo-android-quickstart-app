@@ -481,8 +481,8 @@ public class MainActivity extends AppCompatActivity implements PlivoBackEnd.Back
         outgoing = ((App) getApplication()).backend().getOutgoing();
         if (outgoing != null) {
             Map<String, String> headers = new HashMap<String, String>();
-            headers.put("X-PH-Header1", "Value1");
-            headers.put("X-PH-Header2", "Value2");
+            headers.put("X-PH-CallerId", "+16143726410");
+            headers.put("X-PH-loggedId", "5e2cdc51-5554-4fa4-bb50-24de57b4c7a4");
             if (!outgoing.call(phoneNum, headers)) {
                 updateUI(STATE.INVALID, outgoing);
             }
