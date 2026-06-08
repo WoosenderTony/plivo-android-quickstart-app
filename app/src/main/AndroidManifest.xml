@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.plivo.plivosimplequickstart">
+    package="com.woosender.mobilern.qa">
 
     <application
         android:name=".App"
@@ -28,7 +28,7 @@
             android:screenOrientation="portrait"/>
 
         <service
-            android:name="com.plivo.plivosimplequickstart.PlivoFCMService"
+            android:name="com.woosender.mobilern.qa.PlivoFCMService"
             android:permission=""
             tools:ignore="ExportedService">
             <intent-filter>

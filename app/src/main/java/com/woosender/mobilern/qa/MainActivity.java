@@ -1,10 +1,10 @@
-package com.plivo.plivosimplequickstart;
+package com.woosender.mobilern.qa;
 
-import static com.plivo.plivosimplequickstart.Utils.HH_MM_SS;
-import static com.plivo.plivosimplequickstart.Utils.MM_SS;
-import static com.plivo.plivosimplequickstart.Utils.USERNAME;
-import static com.plivo.plivosimplequickstart.Utils.startVibrating;
-import static com.plivo.plivosimplequickstart.Utils.stopVibrating;
+import static com.woosender.mobilern.qa.Utils.HH_MM_SS;
+import static com.woosender.mobilern.qa.Utils.MM_SS;
+import static com.woosender.mobilern.qa.Utils.USERNAME;
+import static com.woosender.mobilern.qa.Utils.startVibrating;
+import static com.woosender.mobilern.qa.Utils.stopVibrating;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -52,7 +52,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.plivo.endpoint.Incoming;
 import com.plivo.endpoint.Outgoing;
-import com.plivo.plivosimplequickstart.PlivoBackEnd.STATE;
+import com.woosender.mobilern.qa.PlivoBackEnd.STATE;
 
 import org.json.JSONObject;
 

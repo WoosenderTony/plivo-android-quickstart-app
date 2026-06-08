@@ -1,4 +1,4 @@
-package com.plivo.plivosimplequickstart;
+package com.woosender.mobilern.qa;
 
 import org.junit.Test;
 

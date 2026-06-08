@@ -1,6 +1,6 @@
-package com.plivo.plivosimplequickstart;
+package com.woosender.mobilern.qa;
 
-import static com.plivo.plivosimplequickstart.Utils.startVibrating;
+import static com.woosender.mobilern.qa.Utils.startVibrating;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;

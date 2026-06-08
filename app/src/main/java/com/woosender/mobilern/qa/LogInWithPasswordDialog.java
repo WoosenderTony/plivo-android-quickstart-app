@@ -1,4 +1,4 @@
-package com.plivo.plivosimplequickstart;
+package com.woosender.mobilern.qa;
 
 import android.app.Dialog;
 import android.content.Intent;

@@ -6,9 +6,10 @@ def username = properties.getProperty("plivo.username", "") ?: "\"\""
 def password = properties.getProperty("plivo.password", "") ?: "\"\""
 
 android {
+    namespace "com.woosender.mobilern.qa"
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.plivo.plivosimplequickstart"
+        applicationId "com.woosender.mobilern.qa"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

@@ -1,4 +1,4 @@
-package com.plivo.plivosimplequickstart;
+package com.woosender.mobilern.qa;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.plivo.plivosimplequickstart", appContext.getPackageName());
+        assertEquals("com.woosender.mobilern.qa", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.plivo.plivosimplequickstart;
+package com.woosender.mobilern.qa;
 
 public class Constants {
     public static final String ANSWER_ACTION = "ANSWER_ACTION";
