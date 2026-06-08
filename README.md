@@ -18,17 +18,15 @@ To get started with this quickstart application follow these steps.
 
    - Android SDK supports x86, x86_64, arm64-v8a, armeabi-v7a architectures and Android OS 6 & above.
    - You can use Android Studio or Eclipse to build this quickstart app.
-   - Plivo Android SDK supports IPv6 networks. Users can make and receive calls when their device is connected to a network that uses IPv4, IPv6, or both versions of the protocol.
+   - Plivo Android SDK supports IPv4 networks only. Users can make and receive calls when their device is connected to a network that uses IPv4 versions of the protocol.
 
 
 ### <a name="bullet1"></a> Install the Plivo Android SDK using gradle
 
-It's easy to install the Android sdk if you manage your dependencies using gradle. Simply add the following to your build.gradle under app folder and remove the aar file under plivo-android-quickstart-app/app/libs:
+It's easy to install the Android sdk if you manage your dependencies using gradle. Simply add the following to your build.gradle under app folder
 ```
-// Replace 2.0.16 with latest version
-implementation 'com.plivo.endpoint:endpoint:2.0.16@aar'
+implementation 'com.plivo.endpoint:endpoint:3.2.1-beta@aar'
 ```
-If you don't want to use gradle, simply build project since we already have aar file by default under plivo-android-quickstart-app/app/libs. 
 
 [SDK Reference](https://www.plivo.com/docs/sdk/client/android/reference) - More documentation related to the Voice Android SDK
 
@@ -57,6 +55,7 @@ You can create an endpoint from the Plivo Console and assign an application to m
 
 
 ### <a name="bullet3"></a> Register and Unregister Endpoints
+![plivo-android-quickstart-app](ReadMeImages/loginWithUsernamenJWT.jpg)
 
 Implement SIP register to Plivo Communication Server
 
@@ -79,19 +78,36 @@ public void login(String username, String password, String fcmToken) {
 public void login(String username, String password, String fcmToken, String certificateId) {
    endpoint.login(username, password, fcmToken, certificateId);
 }
+```
+#### With Access Tokens/ JWT
+You can register an endpoint using:
 
-// To register with SIP Server using registration timeout
-public void login(String username, String password, String regTimeout) {
-   endpoint.login(username, password, regTimeout);
-}
+- Access Token, device token, and certificate ID
 
-//To unregister with SIP Server
-public void logout() {
-   endpoint.logout();
-}
+```
+public boolean loginWithJwtToken(String JWTToken, String deviceToken, String certificateId)
 ```
 
-If the registration to an endpoint succeeds the following delegate gets called 
+- Access Token, and device token
+
+```
+public boolean loginWithJwtToken(String JWTToken, String deviceToken)
+```
+
+- Access Token
+
+```
+public boolean loginWithJwtToken(String JWTToken)
+```
+- Access Token Generator
+
+```
+public boolean loginWithAccessTokenGenerator(AccessTokenListener accessTokenListener)
+```
+
+>Check out our [Github example](https://github.com/plivo/plivo-android-quickstart-app/tree/beta) for implementation.
+
+If the registration to an endpoint succeeds the following interface method gets called
 ```
 @Override
 public void onLogin() {
@@ -99,11 +115,40 @@ public void onLogin() {
 }
 ```
 
-If the registration to an endpoint fails the following delegate gets called 
+If the registration to an endpoint fails the following interface method gets called
 ```
 @Override
 public void onLoginFailed() {
    if (loginListener != null) loginListener.onLogin(false);
+}
+```
+
+If the registration to an endpoint fails with JWT the following interface method gets called
+```
+@Override
+public void onLoginFailed(String events) {
+   if (loginListener != null) loginListener.onLogin(false);
+}
+```
+
+Possible error events:
+- INVALID_ACCESS_TOKEN
+- INVALID_ACCESS_TOKEN_HEADER
+- INVALID_ACCESS_TOKEN_ISSUER
+- INVALID_ACCESS_TOKEN_SUBJECT
+- ACCESS_TOKEN_NOT_VALID_YET
+- ACCESS_TOKEN_EXPIRED
+- INVALID_ACCESS_TOKEN_SIGNATURE
+- INVALID_ACCESS_TOKEN_GRANTS
+- EXPIRATION_EXCEEDS_MAX_ALLOWED_TIME
+- MAX_ALLOWED_LOGIN_REACHED
+
+
+When the user logs in with JWT and does not have the permission to make outgoing/receive incoming calls.
+```
+@Override
+public void onPermissionDenied(String message) {
+   Log.d(TAG,message); 
 }
 ```
 
@@ -149,36 +194,36 @@ public boolean callH(String dest, Map<String, String> headers);
 ### Receive an incoming call
 
 To enable Pushkit Integration in the SDK:
-Login with registerToken, create FirebaseMessagingService class and implement relayVoipPushNotification method
+Login with registerToken, create FirebaseMessagingService class and implement ```loginForIncomingWithUsername``` method
+and ```loginForIncomingWithUsername```.
 ```
-//Register pushkit token using the login method as mentioned above
-public void login(String username, String password, String fcmToken) {
-   endpoint.login(username, password, fcmToken);
-}
+//Register with SIP server with device token using above mentioned method
 
-//Create a FirebaseMessagingService class and call relayIncomingPushData method
+//Create a FirebaseMessagingService class and call loginForIncoming  method
 public class PlivoFCMService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getData() != null) {
-            ((App) getApplication()).backend().relayIncomingPushData(new HashMap<>(remoteMessage.getData()));
-            startActivity(new Intent(this, MainActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            if (Pref.newInstance(getApplicationContext()).getBoolean(Constants.IS_LOGIN_WITH_TOKEN)) {
+                    ((App) getApplication()).backend().loginForIncomingWithJwt(deviceToken, JWT_TOKEN, pushMap);
+                } else if (isLoginWithTokenGenerator) {
+                    ((App) getApplication()).backend().loginWithAccessTokenGenerator(pushMap);
+                } else {
+                ((App) getApplication()).backend().loginForIncomingWithUsername(username, password, deviceToken, "", pushMap);
             );
         }
     }
 }
+```
 
-//receive and pass on (incoming call information or a message) to SDK using relayVoipPushNotification method.
-public void relayIncomingPushData(HashMap<String, String> incomingData) {
-    if (incomingData != null && !incomingData.isEmpty()) {
-        endpoint.relayVoipPushNotification(incomingData);
-    }
-}
+
+NOTE: ```relayIncomingPushData``` is now deprecated. Use ```loginForIncomingWithUsername``` method
+and ``loginForIncomingWithUsername``
+
 
 incomingData is the Map object forwarded by the firebase push notification. This will enable the application to receive incoming calls even the app is not in foreground.
-```
+
 incomingData is the Map object forwarded by the firebase push notification. This will enable the application to receive incoming calls even if the app is not in the foreground.
 
 Please refer to this [guide](https://www.plivo.com/docs/sdk/client/android/reference#setting-up-push-notification) to learn about Generating VoIP Certificate
